@@ -9,8 +9,18 @@ enum PermissionLevel {
 class PermissionManager {
     private PermissionLevel mCurrentLevel = PermissionLevel.USER;
 
-    public PermissionLevel getmCurrentLevel() {
-        return mCurrentLevel;
+    public String getmCurrentLevel() {
+        switch (this.mCurrentLevel) {
+            case USER:
+                return "USER";
+            case ADMIN:
+                return "ADMIN";
+            case DEVELOPER:
+                return "DEVELOPER";
+            default:
+                break;
+        }
+        return null;
     }
 
     public void setmCurrentLevel(PermissionLevel mCurrentLevel) {
