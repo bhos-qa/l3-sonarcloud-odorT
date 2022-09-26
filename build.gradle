@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'org.sonarqube' version "$sonarqubeVersion"
+    id 'jacoco'
 }
 
 group 'org.lab3'
@@ -16,4 +18,28 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+jacoco {
+    toolVersion = "$jacocoToolVersion"
+    reportsDir = file("build/reports/jacoco")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled false
+    }
+}
+
+sonarqube {
+    properties {
+        property "sonar.java.coveragePlugin", "jacoco"
+        property "sonar.jacoco.reportPath", "build/jacoco/test.exec"
+        property "sonar.junit.reportsPath", "build/test-results/test"
+        property "sonar.projectKey", "cb-${project.name}"
+        property "sonar.projectName", "cb-${project.name}"
+        property "sonar.scm.forceReloadAll", "true"
+        property "sonar.java.checkstyle.reportPaths", "build/reports/checkstyle/main.xml"
+    }
 }
