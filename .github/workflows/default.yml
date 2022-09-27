@@ -65,8 +65,17 @@ jobs:
         run: |
           ./gradlew sonarqube  \
               -PSONAR_HOST=https://sonarcloud.io/  \
-              -PSONAR_TOKEN=${{ secrets.SONAR_TOKEN }}  \
-              -Dsonar.qualitygate.wait=true  \
+              -PSONAR_TOKEN=68b70ce25b70df213fde891f59d5fc89180867b7  \
+              -Dsonar.qualitygate.wait=true
+
+      - uses: kitabisa/sonarqube-action@master
+        with:
+          host: https://sonarcloud.io
+          login: ${{ secrets.SONAR_TOKEN }}
+          projectBaseDir: "src/"
+          projectKey: "bhos-qa_l3-sonarcloud-odorT"
+          projectName: "bhos-qa_l3-sonarcloud-odorT"
+
 
       - name: Test Report
         uses: dorny/test-reporter@v1
