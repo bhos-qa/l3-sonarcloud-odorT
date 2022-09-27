@@ -29,6 +29,8 @@ replay_pid*
 
 ### Gradle ###
 .gradle
+build
+bin
 **/build/
 !src/**/build/
 
