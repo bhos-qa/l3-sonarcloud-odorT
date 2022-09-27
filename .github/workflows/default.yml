@@ -68,14 +68,22 @@ jobs:
 #              -PSONAR_TOKEN=68b70ce25b70df213fde891f59d5fc89180867b7  \
 #              -Dsonar.qualitygate.wait=true
 
-      - uses: kitabisa/sonarqube-action@master
+      - uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          host: https://sonarcloud.io
-          login: ${{ secrets.SONAR_TOKEN }}
           projectBaseDir: "src/"
-          projectKey: "bhos-qa_l3-sonarcloud-odorT"
-          projectName: "bhos-qa_l3-sonarcloud-odorT"
-          organization: "bhos-qa"
+        args: >
+          -Dsonar.host.url=https://sonarcloud.io
+          -Dsonar.organization=bhos-qa
+          -Dsonar.projectKey=bhos-qa_l3-sonarcloud-odorT
+          -Dsonar.projectName=bhos-qa_l3-sonarcloud-odorT
+          -Dsonar.java.coveragePlugin=jacoco
+          -Dsonar.jacoco.reportPath=build/jacoco/test.exec
+          -Dsonar.junit.reportsPath=build/test-results/test
+          -Dsonar.scm.forceReloadAll=true
+          -Dsonar.verbose=true
 
       - name: Test Report
         uses: dorny/test-reporter@v1
