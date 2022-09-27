@@ -63,7 +63,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          ../gradlew sonarqube  \
+          ./gradlew sonarqube  \
               -PSONAR_HOST=https://sonarcloud.io/  \
               -PSONAR_TOKEN=${{ secrets.SONAR_TOKEN }}  \
               -Dsonar.qualitygate.wait=true  \
