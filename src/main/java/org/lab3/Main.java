@@ -31,9 +31,5 @@ class PermissionManager {
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
-        PermissionManager manager = new PermissionManager();
-        System.out.println(manager.getmCurrentLevel());
-        manager.setmCurrentLevel(PermissionLevel.ADMIN);
-        System.out.println(manager.getmCurrentLevel());
     }
 }

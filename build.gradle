@@ -37,8 +37,8 @@ sonarqube {
         property "sonar.java.coveragePlugin", "jacoco"
         property "sonar.jacoco.reportPath", "build/jacoco/test.exec"
         property "sonar.junit.reportsPath", "build/test-results/test"
-        property "sonar.projectKey", "cb-${project.name}"
-        property "sonar.projectName", "cb-${project.name}"
+        property "sonar.projectKey", "${projectKey}"
+        property "sonar.projectName", "${projectName}"
         property "sonar.scm.forceReloadAll", "true"
         property "sonar.java.checkstyle.reportPaths", "build/reports/checkstyle/main.xml"
     }
