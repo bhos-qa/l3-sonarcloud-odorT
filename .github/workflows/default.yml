@@ -75,7 +75,7 @@ jobs:
           projectBaseDir: "src/"
           projectKey: "bhos-qa_l3-sonarcloud-odorT"
           projectName: "bhos-qa_l3-sonarcloud-odorT"
-
+          organization: "bhos-qa"
 
       - name: Test Report
         uses: dorny/test-reporter@v1
