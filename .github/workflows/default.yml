@@ -58,15 +58,15 @@ jobs:
 #          host: ${{ secrets.SONARQUBE_HOST }}
 #          login: ${{ secrets.SONARQUBE_TOKEN }}
 
-      - name: Sonarqube analyze
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          ./gradlew sonarqube  \
-              -PSONAR_HOST=https://sonarcloud.io/  \
-              -PSONAR_TOKEN=68b70ce25b70df213fde891f59d5fc89180867b7  \
-              -Dsonar.qualitygate.wait=true
+#      - name: Sonarqube analyze
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#        run: |
+#          ./gradlew sonarqube  \
+#              -PSONAR_HOST=https://sonarcloud.io/  \
+#              -PSONAR_TOKEN=68b70ce25b70df213fde891f59d5fc89180867b7  \
+#              -Dsonar.qualitygate.wait=true
 
       - uses: kitabisa/sonarqube-action@master
         with:
