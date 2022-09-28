@@ -75,6 +75,7 @@ jobs:
 
       - name: gradle test and jacoco
         run: |
+          ./gradlew build
           ./gradlew test
           ./gradlew jacocoTestReport
           ls -al build
