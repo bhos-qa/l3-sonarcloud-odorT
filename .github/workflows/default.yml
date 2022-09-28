@@ -78,7 +78,10 @@ jobs:
           ./gradlew build
           ./gradlew test
           ./gradlew jacocoTestReport
-          ls -al build/classes
+          cat > sonar-project.properties <<EOF
+          sonar.java.binaries=$(find . -path '*/build/classes/java' | xargs | tr ' ' ',')
+          EOF
+
 
       - uses: sonarsource/sonarcloud-github-action@master
         env:
@@ -95,4 +98,3 @@ jobs:
             -Dsonar.jacoco.reportPath=build/jacoco/test.exec
             -Dsonar.junit.reportsPath=build/test-results/test
             -Dsonar.scm.forceReloadAll=true
-            -Dsonar.java.binaries=/build/classes/java
