@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 
-public class PermissionManagerTest {
+class PermissionManagerTest {
 
     PermissionManager manager;
     HashMap<PermissionLevel, String> permissions = new HashMap<>();
