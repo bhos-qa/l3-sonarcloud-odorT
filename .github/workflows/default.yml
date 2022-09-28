@@ -94,4 +94,3 @@ jobs:
             -Dsonar.junit.reportsPath=build/test-results/test
             -Dsonar.scm.forceReloadAll=true
             -Dsonar.java.binaries=build/classes
-            -Dsonar.verbose=true
