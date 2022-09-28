@@ -74,27 +74,27 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle
 
       - name: gradle test and jacoco
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           ./gradlew build
           ./gradlew test
           ./gradlew jacocoTestReport
-          cat > sonar-project.properties <<EOF
-          sonar.java.binaries=$(find . -path '*/build/classes/java' | xargs | tr ' ' ',')
-          EOF
+          ./gradlew sonarqube --info
 
-
-      - uses: sonarsource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          projectBaseDir: "src/"
-          args: >
-            -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.organization=bhos-qa
-            -Dsonar.projectKey=bhos-qa_l3-sonarcloud-odorT
-            -Dsonar.projectName=bhos-qa_l3-sonarcloud-odorT
-            -Dsonar.java.coveragePlugin=jacoco
-            -Dsonar.jacoco.reportPath=build/jacoco/test.exec
-            -Dsonar.junit.reportsPath=build/test-results/test
-            -Dsonar.scm.forceReloadAll=true
+#      - uses: sonarsource/sonarcloud-github-action@master
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#        with:
+#          projectBaseDir: "src/"
+#          args: >
+#            -Dsonar.host.url=https://sonarcloud.io
+#            -Dsonar.organization=bhos-qa
+#            -Dsonar.projectKey=bhos-qa_l3-sonarcloud-odorT
+#            -Dsonar.projectName=bhos-qa_l3-sonarcloud-odorT
+#            -Dsonar.java.coveragePlugin=jacoco
+#            -Dsonar.jacoco.reportPath=build/jacoco/test.exec
+#            -Dsonar.junit.reportsPath=build/test-results/test
+#            -Dsonar.scm.forceReloadAll=true
