@@ -95,4 +95,4 @@ jobs:
             -Dsonar.jacoco.reportPath=build/jacoco/test.exec
             -Dsonar.junit.reportsPath=build/test-results/test
             -Dsonar.scm.forceReloadAll=true
-            -Dsonar.java.binaries=./build/classes
+            -Dsonar.java.binaries=**/build/classes
