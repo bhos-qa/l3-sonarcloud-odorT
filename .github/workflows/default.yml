@@ -38,6 +38,18 @@ jobs:
         run: |
           ./gradlew test
 
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: Junit Tests
+          path: build/test-results/test/TEST*.xml
+          reporter: java-junit
+
+  sonar:
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Cache SonarCloud packages
         uses: actions/cache@v1
         with:
@@ -52,21 +64,10 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
 
-#      - name: SonarQube Scan
-#        uses: kitabisa/sonarqube-action@v1.2.0
-#        with:
-#          host: ${{ secrets.SONARQUBE_HOST }}
-#          login: ${{ secrets.SONARQUBE_TOKEN }}
-
-#      - name: Sonarqube analyze
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-#        run: |
-#          ./gradlew sonarqube  \
-#              -PSONAR_HOST=https://sonarcloud.io/  \
-#              -PSONAR_TOKEN=68b70ce25b70df213fde891f59d5fc89180867b7  \
-#              -Dsonar.qualitygate.wait=true
+      - name: gradle test and jacoco
+        run: |
+          - ./gradlew test
+          - ./gradlew jacocoTestReport
 
       - uses: sonarsource/sonarcloud-github-action@master
         env:
@@ -83,12 +84,5 @@ jobs:
             -Dsonar.jacoco.reportPath=build/jacoco/test.exec
             -Dsonar.junit.reportsPath=build/test-results/test
             -Dsonar.scm.forceReloadAll=true
+            -Dsonar.java.binaries=build/classes
             -Dsonar.verbose=true
-
-      - name: Test Report
-        uses: dorny/test-reporter@v1
-        if: success() || failure()
-        with:
-          name: Junit Tests
-          path: build/test-results/test/TEST*.xml
-          reporter: java-junit
