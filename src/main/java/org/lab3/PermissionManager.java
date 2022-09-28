@@ -6,7 +6,7 @@ enum PermissionLevel {
     USER
 }
 
-class PermissionManager {
+public class PermissionManager {
     private PermissionLevel mCurrentLevel = PermissionLevel.USER;
 
     public String getmCurrentLevel() {
@@ -24,11 +24,5 @@ class PermissionManager {
 
     public void setmCurrentLevel(PermissionLevel mCurrentLevel) {
         this.mCurrentLevel = mCurrentLevel;
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
     }
 }
