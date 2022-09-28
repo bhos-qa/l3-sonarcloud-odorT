@@ -18,9 +18,8 @@ class PermissionManager {
             case DEVELOPER:
                 return "DEVELOPER";
             default:
-                break;
+                return null;
         }
-        return null;
     }
 
     public void setmCurrentLevel(PermissionLevel mCurrentLevel) {
